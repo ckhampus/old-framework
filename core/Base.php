@@ -1,11 +1,16 @@
 <?php
 
+/**
+ * Base 
+ * 
+ * @package Framework
+ * @version //autogen//
+ * @copyright Copyright (C) 2005-2007 eZ systems as. All rights reserved.
+ * @author Cristian Hampus
+ * @license http://ez.no/licenses/new_bsd New BSD License
+ */
 abstract class Base {
     private $properties = array();
-
-    function __construct() {
-    
-    }
 
     /**
      * Add property to class. 

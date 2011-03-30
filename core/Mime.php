@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Mime 
+ * 
+ * @package Framework
+ * @version //autogen//
+ * @copyright Copyright (C) 2005-2007 eZ systems as. All rights reserved.
+ * @author Cristian Hampus
+ * @license http://ez.no/licenses/new_bsd New BSD License
+ */
 class Mime {
     private static mimes = array(
         'applicatiion' => array(
@@ -83,11 +92,6 @@ class Mime {
             'x-ms-wmv'
         )
     );
-
-
-    function __construct() {
-
-    }
 
     /**
      * Lookup mime type by subtype. 

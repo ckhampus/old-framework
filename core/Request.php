@@ -14,9 +14,9 @@ require_once('Mime.php');
  */
 class Request extends Base {
     private $headers = array();
-    private $body = NULL;
     
     function __construct() {
+        $this->addProperty('body');
         $this->addProperty('isXMLHttpRequest');
 
         foreach ($_SERVER as $key => $val) {
