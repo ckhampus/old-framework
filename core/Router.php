@@ -14,17 +14,23 @@ class Router extends Base {
         $base = parse_url(self::getBaseUrl());
 
         $requested_path = str_replace('//', '/', str_replace(self::getScriptName(), '', $request['path']));
-        //$base_path = str_replace(self::getScriptName(), '', $base['path']);
 
-        $path = substr($requested_path, strlen($base['path']) - 1);
+        $path = substr($requested_path, strlen($base['path']));
 
         foreach ($this->routes as $route) {
             $arguments = array_diff(explode('/', $path), explode('/', $route['url']));
             $class = str_replace(' ', '', ucwords(str_replace('-', ' ', $route['class'])));
             $filename = realpath(sprintf('%s/%s.php', $this->settings['controller_dir'], $route['class']));
-
+      
             if (preg_match(sprintf('/^%s$/', $route['regexp']), $path)) {
-                if (File::isFile($filename)) {
+                if (file_exists($filename)) {
+                    
+                    include_once($filename);
+
+                    $object = new $class($this->settings);
+                
+                    call_user_func_array(array($object, $_SERVER['REQUEST_METHOD']), $arguments);
+                
                     return TRUE;
                 }
             }
@@ -54,7 +60,7 @@ class Router extends Base {
      */
     public static function getCurrentUrl() {
         $url = self::getBaseUrl();
-        $url .= $_SERVER['REQUEST_URI'];
+        $url .= substr($_SERVER['REQUEST_URI'], strripos($_SERVER['REQUEST_URI'], '/'));
 
         return $url;
     }
@@ -68,7 +74,7 @@ class Router extends Base {
      */
     public static function getScriptUrl() {
         $url = self::getBaseUrl();
-        $url .= self::getScriptName();
+        $url .= '/'.self::getScriptName();
 
         return $url;
     }

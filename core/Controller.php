@@ -10,7 +10,7 @@ abstract class Controller extends Base  {
      * @return void
      */
     public function get() {
-        throw new BadMethodCallException('Method not implemented.')
+        throw new BadMethodCallException('Method not implemented.');
     }
 
     /**
@@ -19,7 +19,7 @@ abstract class Controller extends Base  {
      * @return void
      */
     public function post() {
-        throw new BadMethodCallException('Method not implemented.')
+        throw new BadMethodCallException('Method not implemented.');
     }
 
 
@@ -29,7 +29,7 @@ abstract class Controller extends Base  {
      * @return void
      */
     public function put() {
-        throw new BadMethodCallException('Method not implemented.')
+        throw new BadMethodCallException('Method not implemented.');
     }
 
     /**
@@ -38,6 +38,6 @@ abstract class Controller extends Base  {
      * @return void
      */
     public function delete() {
-        throw new BadMethodCallException('Method not implemented.')
+        throw new BadMethodCallException('Method not implemented.');
     }
 }

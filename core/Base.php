@@ -49,12 +49,12 @@ abstract class Base {
      * @param mixed $value 
      * @return mixed
      */
-    public function __get($property, $value) {
+    public function __get($property) {
         $methodname = sprintf('_get%s', ucwords($property));
 
         if (array_key_exists($property, $this->properties)) {
             if (method_exists($this, $methodname)) {
-                return $this->$methodname($value);
+                return $this->$methodname();
             } else {
                 return $this->properties[$property];
             }

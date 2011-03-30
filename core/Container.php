@@ -46,11 +46,11 @@ class Container implements ArrayAccess {
      * @return void
      */
     public function offsetGet($id) {
-        if (!isset(self::$values)) {
+        if (!isset(self::$values[$id])) {
             throw new InvalidArgumentException(sprintf('Identifier "%s" is not defined', $id));
         }
 
-        return is_callable(self::$values[$id]) ? self::$values[$id]($this) : self::$values[$id];
+        return is_callable(self::$values[$id]) ? call_user_func(self::$values[$id], $this) : self::$values[$id];
     }
 
     /**
@@ -73,5 +73,5 @@ class Container implements ArrayAccess {
      */
     public function offsetUnset($id) {
         unset(self::$values[$id]);
-    }
+    } 
 }
