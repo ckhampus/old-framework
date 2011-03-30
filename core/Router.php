@@ -49,12 +49,18 @@ class Router extends Base {
             if (preg_match(sprintf('/^%s$/', $route['regexp']), $path)) {
                 if (file_exists($filename)) {
                     
-                    include_once($filename);
+                    $cache = new Cache($this->settings, $route['lifetime']);
+                    
+                    if (!$cache->start('cache_' . md5($path))) {
+                    
+                        include_once($filename);
 
-                    $object = new $route['class']($this->settings);
-                
-                    call_user_func_array(array($object, $_SERVER['REQUEST_METHOD']), $arguments);
-                
+                        $object = new $route['class']($this->settings);
+                    
+                        call_user_func_array(array($object, $_SERVER['REQUEST_METHOD']), $arguments);
+                        
+                        $cache->end();
+                    }
                     return TRUE;
                 }
             }

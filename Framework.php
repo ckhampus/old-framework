@@ -1,6 +1,7 @@
 <?php
 
 require_once('core/Base.php');
+require_once('core/Cache.php');
 require_once('core/Container.php');
 require_once('core/Controller.php');
 require_once('core/Router.php');
@@ -42,7 +43,7 @@ class Framework extends Base {
      * @param string $callback 
      * @param int $lifetime 
      */
-    public function route($url, $callback, $lifetime = NULL) {
+    public function route($url, $class, $lifetime = 0) {
         $regexp = array(
             '/:[a-zA-Z_][a-zA-Z0-9_]*/' => '[\w]+',
             '/\*/' => '.+'
