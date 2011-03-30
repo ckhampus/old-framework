@@ -28,7 +28,7 @@ class Framework extends Base {
         };
     }
 
-    public function route($url, $callback, $lifetime = NULL) {
+    public function route($url, $class, $lifetime = NULL) {
         $regexp = array(
             '/:[a-zA-Z_][a-zA-Z0-9_]*/' => '[\w]+',
             '/\*/' => '.+'
@@ -38,7 +38,7 @@ class Framework extends Base {
         
         $route = array(
             'url' => $url,
-            'class' => $callback,
+            'class' => $class,
             'lifetime' => $lifetime,
             'regexp' => str_replace('/', '\/', $url)
         );
@@ -50,7 +50,7 @@ class Framework extends Base {
         $routes[] = $route;
         $this->container['routes'] = $routes;
     }
-
+    
     public function run() {
         $router = $this->container['router']->dispatch();
     }
