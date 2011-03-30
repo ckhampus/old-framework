@@ -1,11 +1,18 @@
 <?php
 
+/**
+ * Controller 
+ * 
+ * @package Framework
+ * @version //autogen//
+ * @copyright Copyright (C) 2005-2007 eZ systems as. All rights reserved.
+ * @author  
+ * @license http://ez.no/licenses/new_bsd New BSD License
+ */
 abstract class Controller extends Base  {
 
     /**
      * Method that handle HTTP GET method 
-     * 
-     * @return void
      */
     public function get() {
         throw new BadMethodCallException('Method not implemented.');
@@ -13,8 +20,6 @@ abstract class Controller extends Base  {
 
     /**
      * Method that handle HTTP POST method 
-     * 
-     * @return void
      */
     public function post() {
         throw new BadMethodCallException('Method not implemented.');
@@ -23,8 +28,6 @@ abstract class Controller extends Base  {
 
     /**
      * Method that handle HTTP PUT method 
-     * 
-     * @return void
      */
     public function put() {
         throw new BadMethodCallException('Method not implemented.');
@@ -32,8 +35,6 @@ abstract class Controller extends Base  {
 
     /**
      * Method that handle HTTP DELETE method 
-     * 
-     * @return void
      */
     public function delete() {
         throw new BadMethodCallException('Method not implemented.');

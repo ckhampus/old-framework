@@ -9,7 +9,14 @@ class Framework extends Base {
 
     private $container;
 
+    /**
+     * Initialize the framework.
+     * 
+     * @access protected
+     * @return void
+     */
     function __construct() {
+        // Create a new container ovbject
         $this->container = new Container();
 
         // Settings array
@@ -28,6 +35,13 @@ class Framework extends Base {
         };
     }
 
+    /**
+     * Specify a route.
+     * 
+     * @param string $url 
+     * @param string $callback 
+     * @param int $lifetime 
+     */
     public function route($url, $callback, $lifetime = NULL) {
         $regexp = array(
             '/:[a-zA-Z_][a-zA-Z0-9_]*/' => '[\w]+',
@@ -51,6 +65,9 @@ class Framework extends Base {
         $this->container['routes'] = $routes;
     }
 
+    /**
+     * Executes the framework. 
+     */
     public function run() {
         $router = $this->container['router']->dispatch();
     }
