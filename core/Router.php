@@ -1,14 +1,38 @@
 <?php
 
+/**
+ * Router 
+ *
+ * The router class is responsible for routing
+ * requests to the right classes and function.
+ * 
+ * @package Framework
+ * @version //autogen//
+ * @copyright Copyright (C) 2005-2007 eZ systems as. All rights reserved.
+ * @author  
+ * @license http://ez.no/licenses/new_bsd New BSD License
+ */
 class Router extends Base {    
     private $routes = array();
     private $settings = array();
 
+    /**
+     * Creates a new router. 
+     * 
+     * @param Array $routes 
+     * @param Array $settings 
+     * @access protected
+     */
     function __construct(Array $routes, Array $settings) {
         $this->routes = $routes;
         $this->settings = $settings;
     }
 
+    /**
+     * Dispatches the request to the right class.
+     * 
+     * @return bool
+     */
     public function dispatch() {
         $request = parse_url(self::getCurrentUrl());
         $base = parse_url(self::getBaseUrl());
