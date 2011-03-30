@@ -19,7 +19,7 @@ class Router extends Base {
 
         foreach ($this->routes as $route) {
             $arguments = array_diff(explode('/', $path), explode('/', $route['url']));
-            $class = str_replace(' ', '', ucwords(str_replace('-', ' ', $route['class'])));
+            //$class = str_replace(' ', '', ucwords(str_replace('-', ' ', $route['class'])));
             $filename = realpath(sprintf('%s/%s.php', $this->settings['controller_dir'], $route['class']));
       
             if (preg_match(sprintf('/^%s$/', $route['regexp']), $path)) {
@@ -27,7 +27,7 @@ class Router extends Base {
                     
                     include_once($filename);
 
-                    $object = new $class($this->settings);
+                    $object = new $route['class']($this->settings);
                 
                     call_user_func_array(array($object, $_SERVER['REQUEST_METHOD']), $arguments);
                 

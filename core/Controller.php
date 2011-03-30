@@ -1,7 +1,5 @@
 <?php
 
-require_once('Base.php');
-
 abstract class Controller extends Base  {
 
     /**

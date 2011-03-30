@@ -19,37 +19,36 @@ class Framework extends Base {
             'view_dir' => './views'
         );
 
+        // Routes array
         $this->container['routes'] = array();
 
-        
+        // Router object
         $this->container['router'] = function($c) {
             return new Router($c['routes'], $c['settings']);
         };
     }
 
-    public function route($url, $class, $lifetime = NULL) {
+    public function route($url, $callback, $lifetime = NULL) {
         $regexp = array(
             '/:[a-zA-Z_][a-zA-Z0-9_]*/' => '[\w]+',
             '/\*/' => '.+'
         );
     
-        // PHP <5.3.4 can't pass by reference via offsetGet.
-        $c = $this->container['routes'];
+        $routes = $this->container['routes'];
         
-        $temp = array(
+        $route = array(
             'url' => $url,
-            'class' => $class,
+            'class' => $callback,
             'lifetime' => $lifetime,
             'regexp' => str_replace('/', '\/', $url)
         );
         
         foreach ($regexp as $key => $value) {
-            $temp['regexp'] = preg_replace($key, $value, $temp['regexp']);
+            $route['regexp'] = preg_replace($key, $value, $route['regexp']);
         }
         
-        $c[] = $temp;
-        
-        $this->container['routes'] = $c;
+        $routes[] = $route;
+        $this->container['routes'] = $routes;
     }
 
     public function run() {

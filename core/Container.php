@@ -15,6 +15,15 @@ class Container implements ArrayAccess {
      */
     private static $values = array();
     
+    private function get($id) {
+        if (!isset(self::$values[$id])) {
+            throw new InvalidArgumentException(sprintf('Identifier "%s" is not defined', $id));
+        }
+        
+        return is_callable(self::$values[$id]) ? call_user_func(self::$values[$id], $this) : self::$values[$id];
+    }
+    
+    
     /**
      * Add an array of values to the container.
      * 
@@ -49,7 +58,7 @@ class Container implements ArrayAccess {
         if (!isset(self::$values[$id])) {
             throw new InvalidArgumentException(sprintf('Identifier "%s" is not defined', $id));
         }
-
+        
         return is_callable(self::$values[$id]) ? call_user_func(self::$values[$id], $this) : self::$values[$id];
     }
 
